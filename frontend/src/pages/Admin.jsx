@@ -14,13 +14,13 @@ function Admin() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await axios.get('https://mv-water-level-controller-backend.onrender.com//api/products');
+    const res = await axios.get('https://mv-water-level-controller-backend.onrender.com/api/products');
     setProducts(res.data);
   };
 
   const handleAdd = async () => {
     try {
-      await axios.post('https://mv-water-level-controller-backend.onrender.com//api/products', newProduct);
+      await axios.post('https://mv-water-level-controller-backend.onrender.com/api/products', newProduct);
       alert('Product added!');
       fetchProducts();
       setNewProduct({ name: '', price: '', description: '', stock: '', rating: '' });
@@ -31,7 +31,7 @@ function Admin() {
 
   const handleDelete = async (id) => {
     if (window.confirm('Delete this product?')) {
-      await axios.delete(`https://mv-water-level-controller-backend.onrender.com//api/products/${id}`);
+      await axios.delete(`https://mv-water-level-controller-backend.onrender.com/api/products/${id}`);
       fetchProducts();
     }
   };

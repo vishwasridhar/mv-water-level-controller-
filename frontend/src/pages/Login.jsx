@@ -13,20 +13,25 @@ function Login() {
         if (!email || !password) return alert('Please fill all fields!');
         setLoading(true);
         try {
-            const res = await axios.post('https://mv-water-level-controller-backend.onrender.com//api/auth/login', { email, password });
+            const res = await axios.post('https://mv-water-level-controller-backend.onrender.com/api/auth/login', { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/dashboard');
         }
         catch (err) {
-            alert(err.response?.data?.message || 'Login failed');
-        }
+    console.log("LOGIN ERROR:", err);
+    console.log("RESPONSE:", err.response?.data);
+
+    alert(
+        err.response?.data?.message ||
+        err.message ||
+        "Login failed"
+    );
+}
         setLoading(false);
     };
     return (
         <div style={{
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
