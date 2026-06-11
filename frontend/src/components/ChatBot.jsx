@@ -18,7 +18,7 @@ function ChatBot() {
     setLoading(true);
 
     try {
-      const res = await axios.post('https://mv-water-level-controller-backend.onrender.com//api/chat/message', {
+      const res = await axios.post('http://localhost:5000/api/chat/message', {
         message: input
       });
       setMessages(prev => [...prev, { role: 'bot', text: res.data.reply }]);

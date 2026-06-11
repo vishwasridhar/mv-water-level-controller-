@@ -20,7 +20,7 @@ function Register() {
     }
     setLoading(true);
     try {
-      await axios.post('https://mv-water-level-controller-backend.onrender.com/api/auth/register', form);
+      await axios.post('http://localhost:5000/api/auth/register', form);
       alert('Registered successfully!');
       navigate('/');
     } catch (err) {
