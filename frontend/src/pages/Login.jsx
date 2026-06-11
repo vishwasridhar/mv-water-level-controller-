@@ -13,7 +13,7 @@ function Login() {
         if (!email || !password) return alert('Please fill all fields!');
         setLoading(true);
         try {
-            const res = await axios.post('https://your-railway-backend-url.railway.app/api/auth/login', { email, password });
+            const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/dashboard');

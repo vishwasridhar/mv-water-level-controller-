@@ -19,7 +19,7 @@ function Dashboard() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('https://your-railway-backend-url.railway.app/api/products');
+      const res = await axios.get('http://localhost:5000/api/products');
       setProducts(res.data);
     } catch (err) {
       console.log(err);

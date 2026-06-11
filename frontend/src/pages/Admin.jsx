@@ -14,13 +14,13 @@ function Admin() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await axios.get('https://your-railway-backend-url.railway.app/api/products');
+    const res = await axios.get('http://localhost:5000/api/products');
     setProducts(res.data);
   };
 
   const handleAdd = async () => {
     try {
-      await axios.post('https://your-railway-backend-url.railway.app/api/products', newProduct);
+      await axios.post('http://localhost:5000/api/products', newProduct);
       alert('Product added!');
       fetchProducts();
       setNewProduct({ name: '', price: '', description: '', stock: '', rating: '' });
