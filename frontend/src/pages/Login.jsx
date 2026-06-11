@@ -12,8 +12,8 @@ function Login() {
     const handleLogin = async () => {
         if (!email || !password) return alert('Please fill all fields!');
         setLoading(true);
-        try {t
-            const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+        try {
+            const res = await axios.post('https://your-railway-backend-url.railway.app/api/auth/login', { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/dashboard');
@@ -36,7 +36,8 @@ function Login() {
             background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            padding: '20px'
         }}>
             <div style={{
                 background: 'rgba(255,255,255,0.15)',

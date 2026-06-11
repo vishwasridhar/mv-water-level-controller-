@@ -15,7 +15,7 @@ function ResetPassword() {
     if (newPassword !== confirmPassword) return alert('Passwords do not match!');
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/forgot/reset-password', {
+      await axios.post('https://your-railway-backend-url.railway.app/api/forgot/reset-password', {
         email, otp, newPassword
       });
       alert('Password reset successfully!');
