@@ -14,13 +14,13 @@ function Admin() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await axios.get('http://localhost:5000/api/products');
+    const res = await axios.get('https://mv-water-level-controller-backend.onrender.com/api/products');
     setProducts(res.data);
   };
 
   const handleAdd = async () => {
     try {
-      await axios.post('http://localhost:5000/api/products', newProduct);
+      await axios.post('https://mv-water-level-controller-backend.onrender.com/api/products', newProduct);
       alert('Product added!');
       fetchProducts();
       setNewProduct({ name: '', price: '', description: '', stock: '', rating: '' });

@@ -11,7 +11,7 @@ function ForgotPassword() {
     if (!email) return alert('Enter your email!');
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/forgot/send-otp', { email });
+      await axios.post('https://mv-water-level-controller-backend.onrender.com/api/forgot/send-otp', { email });
       alert('OTP sent to your email!');
       navigate('/verify-otp', { state: { email } });
     } catch (err) {
