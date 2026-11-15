@@ -13,10 +13,13 @@ function VerifyOTP() {
     if (!otp) return alert("Enter OTP!");
     setLoading(true);
     try {
-      await axios.post("https://mv-water-level-controller.onrender.com/api", {
-        email,
-        otp,
-      });
+      await axios.post(
+        "https://mv-water-level-controller.onrender.com/api/forgotPassword",
+        {
+          email,
+          otp,
+        },
+      );
       alert("OTP verified!");
       navigate("/reset-password", { state: { email, otp } });
     } catch (err) {

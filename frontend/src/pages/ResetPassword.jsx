@@ -16,11 +16,14 @@ function ResetPassword() {
       return alert("Passwords do not match!");
     setLoading(true);
     try {
-      await axios.post("https://mv-water-level-controller.onrender.com/api", {
-        email,
-        otp,
-        newPassword,
-      });
+      await axios.post(
+        "https://mv-water-level-controller.onrender.com/api/forgotPassword",
+        {
+          email,
+          otp,
+          newPassword,
+        },
+      );
       alert("Password reset successfully!");
       navigate("/");
     } catch (err) {

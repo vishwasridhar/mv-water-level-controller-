@@ -11,9 +11,12 @@ function ForgotPassword() {
     if (!email) return alert("Enter your email!");
     setLoading(true);
     try {
-      await axios.post("https://mv-water-level-controller.onrender.com/api", {
-        email,
-      });
+      await axios.post(
+        "https://mv-water-level-controller.onrender.com/api/forgotPassword",
+        {
+          email,
+        },
+      );
       alert("OTP sent to your email!");
       navigate("/verify-otp", { state: { email } });
     } catch (err) {
