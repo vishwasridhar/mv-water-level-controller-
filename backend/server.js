@@ -15,14 +15,12 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
 const paymentRoutes = require("./routes/payments");
-const chatRoutes = require("./routes/chat");
 const forgotPasswordRoutes = require("./routes/forgotPassword");
 
 // Register routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/payments", paymentRoutes);
-app.use("/api/chat", chatRoutes);
 app.use("/api/forgot", forgotPasswordRoutes);
 
 app.get("/", (req, res) => {
