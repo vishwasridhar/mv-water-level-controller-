@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 
 function Admin() {
   const [products, setProducts] = useState([]);
@@ -18,16 +18,16 @@ function Admin() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await axios.get(
-      "https://mv-water-level-controller.onrender.com",
+    const res = await api.get(
+      "/api/products",
     );
     setProducts(res.data);
   };
 
   const handleAdd = async () => {
     try {
-      await axios.post(
-        "https://mv-water-level-controller.onrender.com",
+      await api.post(
+        "/api/products",
         newProduct,
       );
       alert("Product added!");
@@ -46,8 +46,8 @@ function Admin() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this product?")) {
-      await axios.delete(
-        `https://mv-water-level-controller.onrender.com/${id}`,
+      await api.delete(
+        `/api/products/${id}`,
       );
       fetchProducts();
     }

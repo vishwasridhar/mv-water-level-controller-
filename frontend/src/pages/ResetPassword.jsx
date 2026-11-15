@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -16,7 +16,7 @@ function ResetPassword() {
       return alert("Passwords do not match!");
     setLoading(true);
     try {
-      await axios.post("https://mv-water-level-controller.onrender.com", {
+      await api.post("/api/forgot/reset-password", {
         email,
         otp,
         newPassword,

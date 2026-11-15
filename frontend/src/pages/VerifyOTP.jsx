@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 
 function VerifyOTP() {
   const [otp, setOtp] = useState("");
@@ -13,7 +13,7 @@ function VerifyOTP() {
     if (!otp) return alert("Enter OTP!");
     setLoading(true);
     try {
-      await axios.post("https://mv-water-level-controller.onrender.com", {
+      await api.post("/api/forgot/verify-otp", {
         email,
         otp,
       });

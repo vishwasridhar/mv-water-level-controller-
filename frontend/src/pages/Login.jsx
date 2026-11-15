@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,8 +13,8 @@ function Login() {
     if (!email || !password) return alert("Please fill all fields!");
     setLoading(true);
     try {
-      const res = await axios.post(
-        "https://mv-water-level-controller.onrender.com",
+      const res = await api.post(
+        "/api/auth/login",
         { email, password },
       );
       localStorage.setItem("token", res.data.token);
