@@ -31,6 +31,7 @@ function Dashboard() {
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item._id === product._id);
+
       if (existingItem) {
         return prevCart.map((item) =>
           item._id === product._id
@@ -38,8 +39,10 @@ function Dashboard() {
             : item,
         );
       }
+
       return [...prevCart, { ...product, quantity: 1 }];
     });
+
     setShowCart(true);
     alert(`${product.name} added to cart!`);
   };
@@ -49,7 +52,10 @@ function Dashboard() {
       prevCart
         .map((item) =>
           item._id === productId
-            ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+            ? {
+                ...item,
+                quantity: Math.max(1, item.quantity + delta),
+              }
             : item,
         )
         .filter((item) => item.quantity > 0),
@@ -66,10 +72,12 @@ function Dashboard() {
   };
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   const subtotal = cart.reduce(
     (sum, item) => sum + Number(item.price) * item.quantity,
     0,
   );
+
   const tax = Number((subtotal * 0.05).toFixed(2));
   const delivery = subtotal > 0 ? 50 : 0;
   const total = Number((subtotal + tax + delivery).toFixed(2));
@@ -106,31 +114,46 @@ function Dashboard() {
           >
             💧 MV WATER LEVEL CONTROLLER
           </p>
-          <h2 style={{ color: "white", margin: 0, fontSize: "1.2rem" }}>
+
+          <h2
+            style={{
+              color: "white",
+              margin: 0,
+              fontSize: "1.2rem",
+            }}
+          >
             Welcome,{" "}
             {JSON.parse(localStorage.getItem("user") || "{}")?.name || "Guest"}{" "}
             👋
           </h2>
         </div>
-        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          {JSON.parse(localStorage.getItem("user") || "{}")?.role ===
-            "admin" && (
-            <button
-              onClick={() => navigate("/admin")}
-              style={{
-                background: "rgba(16,185,129,0.75)",
-                border: "none",
-                color: "white",
-                padding: "8px 14px",
-                borderRadius: "20px",
-                cursor: "pointer",
-                fontSize: "0.85rem",
-                fontWeight: "bold",
-              }}
-            >
-              🛠️ Admin Panel
-            </button>
-          )}
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {/* Admin Button - Added */}
+          <button
+            onClick={() => navigate("/admin")}
+            style={{
+              background: "#10b981",
+              border: "none",
+              color: "white",
+              padding: "8px 14px",
+              borderRadius: "20px",
+              cursor: "pointer",
+              fontSize: "0.85rem",
+              fontWeight: "bold",
+            }}
+          >
+            🛠️ Admin Panel
+          </button>
+
+          {/* Cart Button */}
           <button
             onClick={() => setShowCart(true)}
             style={{
@@ -145,6 +168,8 @@ function Dashboard() {
           >
             🛒 Cart ({cart.length})
           </button>
+
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
             style={{
@@ -162,6 +187,7 @@ function Dashboard() {
         </div>
       </div>
 
+      {/* Cart Section */}
       {showCart && (
         <div
           style={{
@@ -183,6 +209,7 @@ function Dashboard() {
             }}
           >
             <h2 style={{ margin: 0 }}>Cart Summary</h2>
+
             <button
               onClick={() => setShowCart(false)}
               style={{
@@ -218,16 +245,30 @@ function Dashboard() {
                     }}
                   >
                     <div>
-                      <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>
+                      <h3
+                        style={{
+                          margin: "0 0 8px",
+                          fontSize: "1rem",
+                        }}
+                      >
                         {item.name}
                       </h3>
+
                       <p style={{ margin: "0 0 6px" }}>Price: ₹{item.price}</p>
+
                       <p style={{ margin: 0 }}>Qty: {item.quantity}</p>
                     </div>
+
                     <div style={{ textAlign: "right" }}>
-                      <p style={{ margin: "0 0 8px", fontWeight: "bold" }}>
+                      <p
+                        style={{
+                          margin: "0 0 8px",
+                          fontWeight: "bold",
+                        }}
+                      >
                         ₹{(Number(item.price) * item.quantity).toFixed(2)}
                       </p>
+
                       <div
                         style={{
                           display: "flex",
@@ -248,6 +289,7 @@ function Dashboard() {
                         >
                           -
                         </button>
+
                         <button
                           onClick={() => updateQuantity(item._id, 1)}
                           style={{
@@ -261,6 +303,7 @@ function Dashboard() {
                         >
                           +
                         </button>
+
                         <button
                           onClick={() => removeFromCart(item._id)}
                           style={{
@@ -280,6 +323,7 @@ function Dashboard() {
                 ))}
               </div>
 
+              {/* Price Details */}
               <div
                 style={{
                   marginTop: "24px",
@@ -289,23 +333,35 @@ function Dashboard() {
                 }}
               >
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <span>Subtotal</span>
                   <span>₹{subtotal.toFixed(2)}</span>
                 </div>
+
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <span>Tax (5%)</span>
                   <span>₹{tax.toFixed(2)}</span>
                 </div>
+
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <span>Delivery Charges</span>
                   <span>₹{delivery.toFixed(2)}</span>
                 </div>
+
                 <div
                   style={{
                     display: "flex",
@@ -318,10 +374,14 @@ function Dashboard() {
                   <span>Total</span>
                   <span>₹{total.toFixed(2)}</span>
                 </div>
+
+                {/* Payment Button */}
                 <button
                   onClick={() => {
                     alert(`Proceeding to pay ₹${total.toFixed(2)}`);
-                    navigate("/payment", { state: { amount: total } });
+                    navigate("/payment", {
+                      state: { amount: total },
+                    });
                   }}
                   style={{
                     marginTop: "18px",
@@ -343,6 +403,7 @@ function Dashboard() {
         </div>
       )}
 
+      {/* Products Section */}
       <div
         style={{
           display: "grid",
@@ -385,6 +446,7 @@ function Dashboard() {
                   display: "block",
                 }}
               />
+
               <h3
                 style={{
                   color: "white",
@@ -394,9 +456,11 @@ function Dashboard() {
               >
                 {product.name}
               </h3>
+
               <div style={{ marginBottom: "8px" }}>
                 {"⭐".repeat(product.rating)}
               </div>
+
               <p
                 style={{
                   color: "white",
@@ -407,6 +471,7 @@ function Dashboard() {
               >
                 ₹{product.price}
               </p>
+
               <button
                 onClick={() => addToCart(product)}
                 style={{
@@ -426,6 +491,8 @@ function Dashboard() {
           );
         })}
       </div>
+
+      {/* ChatBot */}
       <ChatBot />
     </div>
   );
