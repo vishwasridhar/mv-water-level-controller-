@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../api";
+import axios from "axios";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ function ForgotPassword() {
     if (!email) return alert("Enter your email!");
     setLoading(true);
     try {
-      await api.post("/api/forgot/send-otp", {
+      await axios.post("https://mv-water-level-controller.onrender.com/api", {
         email,
       });
       alert("OTP sent to your email!");

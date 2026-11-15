@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
+import axios from "axios";
 import productImg from "../assets/img.jpeg";
 import wireImg from "../assets/wire.jpg";
+import ChatBot from "../components/ChatBot";
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -18,8 +19,8 @@ function Dashboard() {
 
   const fetchProducts = async () => {
     try {
-      const res = await api.get(
-        "/api/products",
+      const res = await axios.get(
+        "https://mv-water-level-controller.onrender.com/api/products",
       );
       setProducts(res.data);
     } catch (err) {
@@ -300,21 +301,23 @@ function Dashboard() {
                   <span>₹{total.toFixed(2)}</span>
                 </div>
                 <button
-                  type="button"
-                  disabled
+                  onClick={() => {
+                    alert(`Proceeding to pay ₹${total.toFixed(2)}`);
+                    navigate("/payment", { state: { amount: total } });
+                  }}
                   style={{
                     marginTop: "18px",
                     width: "100%",
-                    background: "rgba(255,255,255,0.15)",
+                    background: "#22c55e",
                     border: "none",
-                    color: "rgba(255,255,255,0.65)",
+                    color: "#1a1a2e",
                     padding: "14px",
                     borderRadius: "18px",
                     fontWeight: "bold",
-                    cursor: "not-allowed",
+                    cursor: "pointer",
                   }}
                 >
-                  Online payment currently unavailable
+                  Pay ₹{total.toFixed(2)}
                 </button>
               </div>
             </>
@@ -405,6 +408,7 @@ function Dashboard() {
           );
         })}
       </div>
+      <ChatBot />
     </div>
   );
 }

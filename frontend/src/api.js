@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE_URL = (
   import.meta.env.VITE_API_URL ||
-  "https://mv-water-level-controller.onrender.com"
+  "https://mv-water-level-controller.onrender.com/api"
 ).replace(/\/+$/, "");
 
 const api = axios.create({

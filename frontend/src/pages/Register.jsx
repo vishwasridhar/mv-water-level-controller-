@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../api";
+import axios from "axios";
 
 function Register() {
   const [form, setForm] = useState({
@@ -23,7 +23,10 @@ function Register() {
     }
     setLoading(true);
     try {
-      await api.post("/api/auth/register", form);
+      await axios.post(
+        "https://mv-water-level-controller.onrender.com/api/auth/register",
+        form,
+      );
       alert("Registered successfully!");
       navigate("/");
     } catch (err) {
