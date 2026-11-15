@@ -11,8 +11,6 @@ const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 const productRoutes = require("./routes/products");
 app.use("/api/products", productRoutes);
-const chatRoutes = require("./routes/chat");
-app.use("/api/chat", chatRoutes);
 const forgotPasswordRoutes = require("./routes/forgotPassword");
 app.use("/api/forgot", forgotPasswordRoutes);
 
