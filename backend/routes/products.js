@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
+const { protect, adminOnly } = require('../middleware/authmiddleware');
 
 // Get all products
 router.get('/', async (req, res) => {
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 //POST Create product
-router.post('/', async (req, res) => {
+router.post('/', protect, adminOnly, async (req, res) => {
     try{
         const product = new Product(req.body);
         await product.save();
@@ -26,7 +27,7 @@ router.post('/', async (req, res) => {
 });
 
 // DELETE product 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, adminOnly, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: 'Product deleted' });
